@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CR7 Legacy – Unofficial Cristiano Ronaldo Portugal Tribute</title>
+<meta name="description" content="An unofficial fan tribute to Cristiano Ronaldo's career with Portugal: legacy, records, countdown, quiz and fan messages. Designed and developed by Mohammed Bourouaine.">
+<meta name="author" content="Mohammed Bourouaine">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Manrope:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{--red:#b3122a;--green:#0a7a3d;--gold:#c9a24b;--mute:#9a9da3;--f:'Syncopate','Arial Black',sans-serif;--b:'Manrope',system-ui,sans-serif;color-scheme:dark}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:#000;scroll-behavior:smooth}
+body{background:#000;color:#fff;font:300 16px/1.65 var(--b);overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+a{color:inherit}
+.skip{position:absolute;left:-999px}.skip:focus{left:8px;top:8px;z-index:50;background:#fff;color:#000;padding:8px}
+nav{position:fixed;top:0;left:0;right:0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:20px 5vw;background:linear-gradient(#000e,transparent)}
+nav>a.logo{font:700 1rem var(--f);letter-spacing:.45em;text-decoration:none}
+nav .links{display:flex;gap:1.5rem;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase}
+nav .links a{text-decoration:none;color:#cfcfd3;padding:.3rem 0;border-bottom:1px solid transparent;transition:.3s}
+nav .links a:hover,nav .links a.on{color:var(--gold);border-color:var(--gold)}
+#mb{display:none;background:none;border:1px solid #fff;color:#fff;font:400 .6rem var(--f);letter-spacing:.2em;padding:.8rem 1rem;min-height:44px;cursor:pointer}
+#pg{position:fixed;top:0;left:0;height:2px;width:100%;background:linear-gradient(90deg,var(--green),var(--gold),var(--red));transform:scaleX(0);transform-origin:left;z-index:20}
+canvas#c{position:fixed;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+body:after{content:"";position:fixed;inset:0;z-index:5;pointer-events:none;background:radial-gradient(120% 90% at 50% 40%,transparent 55%,rgba(0,0,0,.65))}
+main{position:relative;z-index:2}
+section{position:relative;z-index:2;min-height:100svh;display:flex;align-items:center;padding:12vh 5vw 8vh}
+section.short{min-height:60svh}
+section.flow{flex-direction:column;align-items:flex-start;justify-content:center;gap:2.4rem}
+.col{max-width:600px}
+.eb{font:400 .68rem var(--f);letter-spacing:.3em;color:var(--gold);margin-bottom:1.4rem}
+h1,h2{font-family:var(--f);font-weight:700;text-transform:uppercase;line-height:1.12}
+h1{font-size:clamp(2.2rem,7vw,6rem);line-height:1;letter-spacing:.02em}
+h2{font-size:clamp(1.4rem,3.2vw,2.8rem);margin-bottom:1.4rem}
+p.d{color:var(--mute);max-width:50ch;margin-bottom:1.6rem}
+.sub{font:400 .72rem/1.9 var(--f);letter-spacing:.35em;color:#cfcfd3;margin-top:1.4rem;text-transform:uppercase}
+.gold{background:linear-gradient(120deg,#fff1c0 0%,#d9b35a 40%,#a97c24 70%,#f1d583 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn{display:inline-block;padding:1.05rem 1.9rem;border:1px solid #fff;text-decoration:none;font:400 .66rem var(--f);letter-spacing:.2em;background:none;color:#fff;cursor:pointer;transition:.35s}
+.btn.p{background:linear-gradient(120deg,#f1d583,#c9a24b);border-color:#c9a24b;color:#000}
+.btn:hover,.btn:focus-visible,.btn.p:hover{background:var(--red);border-color:var(--red);color:#fff}
+.row{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem}
+.flag{height:3px;width:120px;background:linear-gradient(90deg,var(--green) 40%,var(--red) 40%);margin-bottom:1.6rem}
+.note{font-size:.72rem;color:#777;margin-top:1.4rem;max-width:56ch}
+.empty{color:var(--mute);font-size:.85rem;border:1px dashed #333;padding:1rem 1.2rem}
+.rv{opacity:0;transform:translateY(30px);transition:opacity 1s,transform 1s}.rv.in{opacity:1;transform:none}
+.card{background:rgba(18,18,20,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid #26262a;border-top:2px solid var(--gold);padding:1.4rem;transition:transform .4s,border-color .4s}
+.card:hover{transform:translateY(-6px);border-color:var(--red)}
+.card b{font:700 1.7rem var(--f);color:var(--gold);display:block}
+.card h3{font:700 .72rem var(--f);letter-spacing:.12em;margin:.7rem 0 .5rem;text-transform:uppercase}
+.card p{font-size:.85rem;color:var(--mute);line-height:1.55}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;width:100%}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;width:100%}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;width:100%}
+a.tile{display:block;text-decoration:none;padding:1.8rem;min-height:170px;background:rgba(18,18,20,.72);border:1px solid #26262a;transition:.4s}
+a.tile:hover{border-color:var(--gold);transform:translateY(-6px)}
+a.tile small{font:.58rem var(--f);letter-spacing:.3em;color:var(--gold)}
+a.tile h3{font:700 1rem var(--f);margin:.8rem 0 .5rem;text-transform:uppercase}
+a.tile p{color:var(--mute);font-size:.85rem}
+.big{font:700 clamp(2rem,6vw,5rem)/1 var(--f);color:var(--gold)}
+.cd{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;width:100%;max-width:860px}
+.cd div{background:rgba(18,18,20,.72);border:1px solid #26262a;border-top:2px solid var(--gold);padding:1.6rem 1rem;text-align:center}
+.cd b{display:block;font:700 clamp(1.8rem,5vw,4rem)/1 var(--f);color:#fff}
+.cd small{display:block;margin-top:.7rem;font:.58rem var(--f);letter-spacing:.3em;color:var(--mute)}
+.pill{display:inline-block;font:.6rem var(--f);letter-spacing:.2em;border:1px solid var(--gold);color:var(--gold);padding:.5rem .9rem}
+.duel{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:stretch;margin-top:2rem;width:100%}
+.side{position:relative;overflow:hidden;text-align:left;padding:2.4rem 2rem;min-height:230px;border:1px solid #2a2a2e;color:#fff;cursor:pointer;font-family:var(--b);transition:transform .4s,border-color .4s,box-shadow .4s}
+.side.red{background:linear-gradient(135deg,#4a0814,#0a0a0b 70%)}.side.grn{background:linear-gradient(135deg,#06351b,#0a0a0b 70%)}
+.side:hover,.side:focus-visible{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 20px 60px rgba(201,162,75,.15)}
+.side span{display:block;font:700 clamp(1.4rem,3.4vw,3rem) var(--f)}.side small{display:block;margin-top:.6rem;color:var(--mute);letter-spacing:.2em;text-transform:uppercase;font-size:.7rem}
+.side i{position:absolute;left:0;bottom:0;height:5px;width:0;background:var(--gold);transition:width 1.6s}
+.side::after{content:attr(data-pct);position:absolute;right:1.6rem;top:1.4rem;font:700 1.6rem var(--f);color:var(--gold)}
+.side.mine{border-color:var(--gold)}
+.side .n{display:block;margin-top:1.4rem;font:700 clamp(2rem,5vw,4rem)/1 var(--f);color:var(--gold);font-style:normal}
+.vs{align-self:center;display:flex;flex-direction:column;align-items:center;gap:.3rem;min-width:90px;font:700 1rem var(--f);color:var(--gold);letter-spacing:.2em}.vs b{font:700 1.5rem var(--f);color:#fff;letter-spacing:0}.vs small{font:400 .55rem var(--f);color:var(--mute)}
+.quiz{width:100%;max-width:720px}
+.quiz .q{font:700 clamp(1rem,2.4vw,1.5rem)/1.4 var(--f);margin-bottom:1.4rem}
+.opts{display:grid;gap:10px}
+.opts button{text-align:left;padding:1rem 1.2rem;background:rgba(18,18,20,.8);border:1px solid #2a2a2e;color:#fff;font:400 1rem var(--b);cursor:pointer;transition:.3s}
+.opts button:hover:not(:disabled){border-color:var(--gold)}
+.opts button.ok{border-color:#2fbf71;background:rgba(10,122,61,.35)}.opts button.bad{border-color:var(--red);background:rgba(179,18,42,.3)}
+.qbar{height:2px;background:#222;margin-bottom:1.6rem}.qbar i{display:block;height:100%;width:0;background:var(--gold);transition:width .4s}
+form.msg{display:grid;gap:12px;width:100%;max-width:560px}
+form.msg input,form.msg textarea{width:100%;padding:1rem;background:#0d0d0f;border:1px solid #2a2a2e;color:#fff;font:400 1rem var(--b)}
+form.msg input:focus,form.msg textarea:focus{outline:none;border-color:var(--gold)}
+.wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;width:100%}
+.wall .card p{color:#ddd;font-size:.95rem}.wall .card h3{color:var(--gold);margin-top:1rem}
+.tl{position:relative;width:100%;max-width:760px;border-left:1px solid #333;padding-left:2rem;display:grid;gap:2rem}
+.tl article{position:relative}.tl article:before{content:"";position:absolute;left:calc(-2rem - 5px);top:.6rem;width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 14px var(--gold)}
+.tl b{font:700 1.3rem var(--f);color:var(--gold)}.tl h3{font:700 .75rem var(--f);letter-spacing:.12em;margin:.3rem 0;text-transform:uppercase}.tl p{color:var(--mute);font-size:.9rem}
+.dev{display:flex;gap:1.4rem;align-items:center;padding:1.6rem;border:1px solid var(--gold);background:rgba(18,18,20,.8);max-width:560px}
+.dev .av{flex:none;width:72px;height:72px;border-radius:50%;display:grid;place-items:center;font:700 1.4rem var(--f);color:#000;background:linear-gradient(120deg,#f1d583,#c9a24b)}
+.dev h3{font:700 1.05rem var(--f);text-transform:uppercase;margin-bottom:.3rem}.dev p{color:var(--mute);font-size:.85rem}
+footer{position:relative;z-index:3;background:#000;border-top:1px solid #1b1b1e;padding:8vh 5vw 5vh;font-size:.75rem;color:#777}
+footer b{font:700 1.4rem var(--f);letter-spacing:.2em;color:#fff;display:block;margin-bottom:1rem}
+footer p{max-width:70ch;margin-bottom:.6rem}
+footer .credit{color:#ddd;font-size:.85rem;margin-top:1rem}footer .credit strong{color:var(--gold);font-weight:600}
+footer .fl{display:flex;flex-wrap:wrap;gap:1.2rem;margin:1.2rem 0}footer .fl a{text-decoration:none;color:#aaa;letter-spacing:.15em;text-transform:uppercase;font-size:.65rem}footer .fl a:hover{color:var(--gold)}
+@media(max-width:1000px){.grid4{grid-template-columns:1fr 1fr}.tiles,.grid3{grid-template-columns:1fr 1fr}}
+@media(max-width:820px){
+ nav{padding:14px 5vw;padding-top:calc(14px + env(safe-area-inset-top,0px))}
+ #mb{display:block}
+ nav .links{display:none;position:fixed;inset:0;z-index:-1;background:#000;flex-direction:column;align-items:center;justify-content:center;gap:1.6rem;font-size:.95rem}
+ nav.open .links{display:flex}
+ .row .btn{flex:1 1 100%;text-align:center;min-height:48px}
+ section{padding:14vh 6vw 8vh}
+ .side{min-height:150px;padding:1.5rem 1.3rem}
+}
+@media(max-width:700px){.duel{grid-template-columns:1fr}.vs{text-align:center}.cd{grid-template-columns:1fr 1fr}.tiles,.grid3{grid-template-columns:1fr}}
+@media(max-width:560px){.grid4{grid-template-columns:1fr}h1{font-size:2.3rem}.dev{flex-direction:column;text-align:center}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}.rv{opacity:1;transform:none}}
+
+.page[hidden]{display:none}
+.adsec{min-height:0;padding:6vh 5vw;justify-content:center}
+.adw{width:100%;max-width:970px;min-height:120px;border:1px solid #1b1b1e;padding:.6rem;text-align:center;background:rgba(10,10,11,.6)}
+.adw small{display:block;font:.55rem var(--f);letter-spacing:.3em;color:#666;margin-bottom:.5rem}
+.cc{position:fixed;left:12px;right:12px;bottom:12px;z-index:40;max-width:560px;background:#111214;border:1px solid #2a2b30;padding:1rem 1.2rem;font-size:.8rem;color:var(--mute);display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.cc[hidden]{display:none}.cc p{flex:1 1 220px}.cc a{color:var(--gold)}.cc button{font:400 .58rem var(--f);letter-spacing:.15em;padding:.8rem 1.1rem;border:1px solid #fff;background:none;color:#fff;cursor:pointer}.cc #ccy{background:#fff;color:#000}
+footer .fl button{background:none;border:0;color:#aaa;letter-spacing:.15em;text-transform:uppercase;font:inherit;font-size:.65rem;cursor:pointer}footer .fl button:hover{color:var(--gold)}
+.legal{max-width:68ch}.legal h3{font:700 .85rem var(--f);letter-spacing:.1em;text-transform:uppercase;margin:1.8rem 0 .6rem;color:var(--gold)}.legal p,.legal li{color:var(--mute);font-size:.92rem;margin-bottom:.6rem}.legal ul{padding-left:1.2rem}.legal a{color:var(--gold)}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<main id="main">
+<div class="page" data-page="home" data-pose=".76,.5,1.1,.5" hidden>
+<section id="hero">
+  <div class="col">
+    <div class="flag rv"></div>
+    <p class="eb rv">UNOFFICIAL FAN TRIBUTE — PORTUGAL</p>
+    <h1 class="rv"><span class="gold">Cristiano<br>Ronaldo</span></h1>
+    <p class="sub rv">Portugal · Number Seven · A nation's pride</p>
+    <div class="row rv"><a class="btn p" href="#legacy">EXPLORE THE LEGACY</a><a class="btn" href="#countdown">THE LAST MATCH</a></div>
+  </div>
+</section>
+<section class="flow short" id="explore">
+  <div class="col"><p class="eb rv">EXPLORE</p><h2 class="rv">Choose your page.</h2></div>
+  <div class="tiles">
+    <a class="tile rv" href="#legacy"><small>01</small><h3>Legacy</h3><p>Two decades in red and green, year by year.</p></a>
+    <a class="tile rv" href="#records"><small>02</small><h3>Records</h3><p>The numbers behind the legend.</p></a>
+    <a class="tile rv" href="#countdown"><small>03</small><h3>Countdown</h3><p>Time since the last match, and a countdown if a farewell is announced.</p></a>
+    <a class="tile rv" href="#quiz"><small>04</small><h3>Quiz</h3><p>Test how well you know his Portugal career.</p></a>
+    <a class="tile rv" href="#vote"><small>05</small><h3>Vote</h3><p>Messi or Ronaldo? Cast your vote.</p></a>
+    <a class="tile rv" href="#fans"><small>06</small><h3>Fan wall</h3><p>Write your thank-you message.</p></a>
+  </div>
+</section>
+</div>
+<div class="page" data-page="legacy" data-pose=".86,.3,.5,-.5" hidden>
+<section class="flow">
+  <div class="col"><p class="eb rv">THE JOURNEY</p><h2 class="rv">Two decades in red and green.</h2></div>
+  <div class="tl">
+    <article class="rv"><b>2003</b><h3>Debut</h3><p>First cap against Kazakhstan on 20 August 2003, aged 18.</p></article>
+    <article class="rv"><b>2004</b><h3>Euro 2004</h3><p>Runner-up on home soil, beaten by Greece in the final.</p></article>
+    <article class="rv"><b>2016</b><h3>Euro 2016</h3><p>Captain as Portugal win their first major title, beating France in the final.</p></article>
+    <article class="rv"><b>2018</b><h3>World Cup</h3><p>Hat-trick in a 3–3 draw with Spain.</p></article>
+    <article class="rv"><b>2019</b><h3>Nations League</h3><p>Winner of the first UEFA Nations League.</p></article>
+    <article class="rv"><b>2021</b><h3>Euro 2020</h3><p>Golden Boot with five goals.</p></article>
+    <article class="rv"><b>2022</b><h3>World Cup</h3><p>Scores to become the first man to score at five World Cups.</p></article>
+    <article class="rv"><b>2025</b><h3>Nations League</h3><p>A second Nations League title, beating Spain in the final.</p></article>
+    <article class="rv"><b>2026</b><h3>Sixth World Cup</h3><p>Portugal go out in the round of 16, 1–0 to Spain, in Ronaldo's sixth World Cup.</p></article>
+  </div>
+  <p class="note rv">Historical highlights. Please verify against UEFA and FIFA records before publishing.</p>
+  <div class="row rv"><a class="btn p" href="#records">SEE THE RECORDS</a><a class="btn" href="#countdown">THE LAST MATCH</a></div>
+</section>
+<section class="adsec" aria-label="Advertisement"><div class="adw"><small>ADVERTISEMENT</small><ins class="adsbygoogle" style="display:block" data-ad-format="auto" data-full-width-responsive="true"></ins></div></section>
+</div>
+<div class="page" data-page="records" data-pose=".88,.2,.4,.3" hidden>
+<section class="flow">
+  <div class="col"><p class="eb rv">THE NUMBERS</p><h2 class="rv">A record nobody else holds.</h2></div>
+  <div class="grid4">
+    <div class="card rv"><b data-n="234">0</b><h3>Caps</h3><p>Appearances for Portugal, the men's international record.</p></div>
+    <div class="card rv"><b data-n="146">0</b><h3>Goals</h3><p>The all-time men's international goals record.</p></div>
+    <div class="card rv"><b data-n="6">0</b><h3>World Cups</h3><p>Six tournaments, and the first man to score at five.</p></div>
+    <div class="card rv"><b data-n="3">0</b><h3>Major titles</h3><p>Euro 2016 and two UEFA Nations League titles.</p></div>
+  </div>
+  <p class="note rv">Totals as reported after the 2026 World Cup and the autumn 2026 Nations League matches. Please verify against UEFA and FIFA before publishing.</p>
+</section>
+<section class="adsec" aria-label="Advertisement"><div class="adw"><small>ADVERTISEMENT</small><ins class="adsbygoogle" style="display:block" data-ad-format="auto" data-full-width-responsive="true"></ins></div></section>
+</div>
+<div class="page" data-page="countdown" data-pose=".86,.5,.6,.3" hidden>
+<section class="flow">
+  <div class="col"><p class="eb rv">THE LAST MATCH</p><h2 class="rv" id="title">The last match with Portugal.</h2>
+  <p class="d rv" id="lead"></p></div>
+  <div><span class="pill rv" id="pill"></span></div>
+  <div class="cd rv" id="cd" aria-live="off">
+    <div><b id="d">0</b><small>DAYS</small></div>
+    <div><b id="h">0</b><small>HOURS</small></div>
+    <div><b id="m">0</b><small>MINUTES</small></div>
+    <div><b id="s">0</b><small>SECONDS</small></div>
+  </div>
+  <p class="note rv" id="match"></p>
+  <p class="note rv" id="why"></p>
+</section>
+<section class="adsec" aria-label="Advertisement"><div class="adw"><small>ADVERTISEMENT</small><ins class="adsbygoogle" style="display:block" data-ad-format="auto" data-full-width-responsive="true"></ins></div></section>
+</div>
+<div class="page" data-page="quiz" data-pose=".86,.25,.45,.4" hidden>
+<section class="flow">
+  <div class="col"><p class="eb rv">THE QUIZ</p><h2 class="rv">Do you know the legend?</h2></div>
+  <div class="quiz" id="quiz"></div>
+</section>
+</div>
+<div class="page" data-page="vote" data-pose=".5,.1,.3,0" hidden>
+<section class="flow">
+  <div class="col"><p class="eb rv">THE DEBATE</p><h2 class="rv">Who is the greatest?</h2><p class="d rv">The question every fan argues about. Cast your vote — one per browser.</p></div>
+  <div class="duel rv"><button class="side red" type="button" data-c="messi"><span>MESSI</span><small>Argentina · No. 10</small><em class="n">0</em><i></i></button><div class="vs"><span>VS</span><b id="vt">0</b><small id="vl">votes</small></div><button class="side grn" type="button" data-c="ronaldo"><span>RONALDO</span><small>Portugal · No. 7</small><em class="n">0</em><i></i></button></div>
+  <p id="voteMsg" class="note" role="status" aria-live="polite"></p>
+  <form class="msg rv" id="who">
+    <input id="wn" maxlength="30" placeholder="Your name (saved for you in this browser)" aria-label="Your name">
+    <div><button class="btn" type="submit">SAVE MY NAME</button></div>
+  </form>
+  <div class="card" id="mine" style="max-width:560px"><h3>My saved profile</h3><p id="mineTxt">Nothing saved yet.</p></div>
+</section>
+</div>
+<div class="page" data-page="fans" data-pose=".88,.15,.35,-.3" hidden>
+<section class="flow">
+  <div class="col"><p class="eb rv">FAN WALL</p><h2 class="rv">Say thank you.</h2>
+  <p class="d rv">Write a short message. For now, messages are saved only in your own browser; a shared worldwide wall needs a moderated backend.</p></div>
+  <form class="msg rv" id="f">
+    <input id="nm" maxlength="30" placeholder="Your name" required aria-label="Your name">
+    <textarea id="tx" maxlength="140" rows="3" placeholder="Obrigado, Cristiano… (max 140 characters)" required aria-label="Message"></textarea>
+    <div><button class="btn p" type="submit">POST MESSAGE</button></div>
+  </form>
+  <div class="wall" id="wall"></div>
+</section>
+</div>
+<div class="page" data-page="support" data-pose=".84,.5,.85,.8" hidden>
+<section>
+  <div class="col"><p class="eb rv">KEEP THE TRIBUTE ALIVE</p><h2 class="rv">Support this fan project.</h2>
+  <p class="d rv">Donations help cover hosting, moderation and development of this independent fan site. They are not payments to Cristiano Ronaldo, his representatives or the Portuguese Football Federation.</p>
+  <div class="row rv" id="donate"></div>
+  <p class="note rv">This site may also show advertising to help fund running costs. See the <a href="#privacy">privacy page</a>.</p></div>
+</section>
+</div>
+<div class="page" data-page="about" data-pose=".86,.5,.7,.3" hidden>
+<section class="flow">
+  <div class="col"><p class="eb rv">ABOUT</p><h2 class="rv">A fan project, built with love.</h2>
+  <p class="d rv">CR7 Legacy is an independent, unofficial tribute to Cristiano Ronaldo's years with the Portugal national team. It is not affiliated with him, his representatives or the Portuguese Football Federation.</p></div>
+  <div class="dev rv">
+    <div class="av" aria-hidden="true">MB</div>
+    <div><p class="eb" style="margin-bottom:.5rem">DESIGNER &amp; DEVELOPER</p><h3>Mohammed Bourouaine</h3><p>Designed and developed this site from the first sketch to the last line of code.</p></div>
+  </div>
+</section>
+</div>
+<div class="page" data-page="privacy" data-pose=".88,.2,.35,.3" hidden>
+<section class="flow">
+  <div class="col"><p class="eb rv">LEGAL</p><h2 class="rv">Privacy &amp; ads.</h2></div>
+  <div class="legal rv">
+    <p>CR7 Legacy is an independent, unofficial fan project designed and developed by Mohammed Bourouaine. It is not affiliated with Cristiano Ronaldo, his representatives or the Portuguese Football Federation.</p>
+    <h3>Advertising</h3>
+    <p>This site may show ads served by Google AdSense. Google and its partners may use cookies or similar technologies to show and measure ads. If you accept, ads may be personalised; if you decline, only non-personalised ads are shown. You can change your choice at any time with the “Ad settings” link in the footer, and manage Google’s ad personalisation at <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer">adssettings.google.com</a>.</p>
+    <h3>Data stored on your device</h3>
+    <ul>
+      <li>Your name (optional), a random private id, your vote and your fan messages are stored in your browser’s local storage only. They are not sent to any server.</li>
+      <li>Your ad-consent choice is stored the same way.</li>
+    </ul>
+    <h3>Contact</h3>
+    <p id="contactTxt">Contact details will be added soon.</p>
+  </div>
+</section>
+</div>
+</main>
+<div class="cc" id="cc" hidden role="dialog" aria-label="Cookie consent"><p>We use cookies to show ads. Accept personalised ads, or decline to see non-personalised ads only. <a href="#privacy">Learn more</a>.</p><button id="ccn" type="button">DECLINE</button><button id="ccy" type="button">ACCEPT</button></div>
+<script>
+/* Public site configuration. Nothing secret belongs here. */
+window.CR7 = {
+  siteUrl: 'https://YOUR-DOMAIN.com',
+  developer: { name: 'Mohammed Bourouaine', role: 'Designer & Developer' },
+
+  /* Last match played for Portugal (as reported: UEFA Nations League vs Wales, Lisbon, 24 Sep 2026). */
+  lastMatch: { date: '2026-09-24T00:00:00+01:00', label: 'Portugal vs Wales · UEFA Nations League · Lisbon' },
+
+  /* COUNTDOWN: if a farewell / final match is ever officially announced, put its kick-off here.
+     Example: '2026-11-18T20:45:00+00:00'. Leave '' while nothing is announced. */
+  farewell: { date: '', label: '' },
+
+  /* GOOGLE ADSENSE: ads stay OFF until you set your real publisher id and ad-unit ids.
+     client = 'ca-pub-XXXXXXXXXXXXXXXX' (AdSense > Account); slots = ad unit ids, in page order (3 units). */
+  ads: { client: 'ca-pub-XXXXXXXXXXXXXXXX', slots: ['', '', ''] },
+  contact: '',
+
+  supabase: { url: 'https://ffhmnhsmrkevvbvmsflx.supabase.co', key: 'sb_publishable__d6FR45nad-kCDnjWm9dzw_RobCZc7B' },
+  hero: { src: 'assets/images/ronaldo-hero.webp', alt: 'Cristiano Ronaldo in the Portugal national team kit', credit: '', creditUrl: '' },
+  donate: { kofi: '', buymeacoffee: '', paypal: '', stripe: '' }
+};
+</script>
+<script>
+/* Per-person profile: a private id + optional name, saved in this browser (localStorage) */
+window.CR7user = (() => {
+  const K = 'cr7user'; let u = null;
+  try { u = JSON.parse(localStorage.getItem(K) || 'null'); } catch (e) {}
+  if (!u || !u.id) { u = { id: 'u' + Math.random().toString(36).slice(2, 10) + Date.now().toString(36), name: '' }; try { localStorage.setItem(K, JSON.stringify(u)); } catch (e) {} }
+  return { get: () => u, setName: n => { u.name = String(n || '').trim().slice(0, 30); try { localStorage.setItem(K, JSON.stringify(u)); } catch (e) {} return u; } };
+})();
+</script>
+<script>
+/* Shared: nav, footer (developer credit), reveals, progress bar, gold 7 canvas */
+(() => {
+  'use strict';
+  const $ = s => document.querySelector(s);
+  const CFG = window.CR7 || {};
+  let page = 'home', pose = [.78, .5, 1, .5], flip = 0;
+  const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const pages = [['home', '#home', 'Home'], ['legacy', '#legacy', 'Legacy'], ['records', '#records', 'Records'],
+    ['countdown', '#countdown', 'Countdown'], ['quiz', '#quiz', 'Quiz'], ['vote', '#vote', 'Vote'],
+    ['fans', '#fans', 'Fans'], ['support', '#support', 'Support'], ['about', '#about', 'About']];
+
+  const nav = document.createElement('nav'); nav.setAttribute('aria-label', 'Main');
+  const logo = Object.assign(document.createElement('a'), { className: 'logo', href: '#home', textContent: 'CR7' });
+  const mb = Object.assign(document.createElement('button'), { id: 'mb', type: 'button', textContent: 'MENU' });
+  mb.setAttribute('aria-expanded', 'false'); mb.setAttribute('aria-label', 'Menu');
+  const links = Object.assign(document.createElement('div'), { className: 'links' });
+  pages.forEach(([k, h, t]) => { const a = document.createElement('a'); a.href = h; a.textContent = t; a.dataset.k = k; links.appendChild(a); });
+  nav.append(logo, mb, links); document.body.prepend(nav);
+  mb.onclick = () => { const o = nav.classList.toggle('open'); mb.setAttribute('aria-expanded', o); mb.textContent = o ? 'CLOSE' : 'MENU'; };
+
+  const pg = Object.assign(document.createElement('div'), { id: 'pg' });
+  const cv = Object.assign(document.createElement('canvas'), { id: 'c' }); cv.setAttribute('aria-hidden', 'true');
+  document.body.prepend(cv); document.body.prepend(pg);
+
+  const f = document.createElement('footer');
+  const b = Object.assign(document.createElement('b'), { textContent: 'CR7 LEGACY' });
+  const fl = Object.assign(document.createElement('div'), { className: 'fl' });
+  pages.forEach(([, h, t]) => { const a = document.createElement('a'); a.href = h; a.textContent = t; fl.appendChild(a); });
+  const pv = Object.assign(document.createElement('a'), { href: '#privacy', textContent: 'Privacy' }); fl.appendChild(pv);
+  const cs = Object.assign(document.createElement('button'), { id: 'ccset', type: 'button', textContent: 'Ad settings', hidden: true }); fl.appendChild(cs);
+  nav.addEventListener('click', e => { if (e.target.closest('.links a')) { nav.classList.remove('open'); mb.textContent = 'MENU'; mb.setAttribute('aria-expanded', false); } });
+  const p1 = Object.assign(document.createElement('p'), { textContent: 'Unofficial fan tribute. Not affiliated with, endorsed by or sponsored by Cristiano Ronaldo, his representatives, or the Portuguese Football Federation. All trademarks belong to their owners.' });
+  const p2 = Object.assign(document.createElement('p'), { textContent: '© 2026 CR7 Legacy fan project.' });
+  const p3 = Object.assign(document.createElement('p'), { className: 'credit' });
+  const d = CFG.developer || {};
+  p3.append(document.createTextNode('Designed & developed by '));
+  const st = Object.assign(document.createElement('strong'), { textContent: d.name || 'Mohammed Bourouaine' }); p3.append(st);
+  f.append(b, fl, p1, p2, p3); document.body.append(f);
+
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .2 });
+  
+
+  /* Single-file router: each page is a hash view */
+  const views = [...document.querySelectorAll('.page')];
+  function route(key) {
+    const k = key || (location.hash || '#home').slice(1); const v = views.find(x => x.dataset.page === k) || views[0];
+    page = v.dataset.page; views.forEach(x => x.hidden = x !== v);
+    pose = v.dataset.pose.split(',').map(Number);
+    flip = reduce ? 0 : Math.PI * 2;
+    links.querySelectorAll('a').forEach(a => { const on = a.dataset.k === page; a.classList.toggle('on', on); on ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current'); });
+    document.title = (page === 'home' ? 'CR7 Legacy – Unofficial Cristiano Ronaldo Portugal Tribute' : (pages.find(p => p[0] === page) || [0, 0, 'Privacy'])[2] + ' – CR7 Legacy');
+    scrollTo(0, 0);
+    v.querySelectorAll('.rv').forEach(el => io.observe(el));
+    dispatchEvent(new Event('cr7:route'));
+  }
+  addEventListener('hashchange', () => route());
+  document.addEventListener('click', e => {
+    const a = e.target.closest && e.target.closest('a[href^="#"]'); if (!a) return;
+    const k = a.getAttribute('href').slice(1); if (!views.some(x => x.dataset.page === k)) return;
+    e.preventDefault(); try { history.replaceState(null, '', '#' + k); } catch (x) {} route(k);
+  });
+  addEventListener('scroll', () => { pg.style.transform = `scaleX(${Math.min(1, scrollY / Math.max(1, document.documentElement.scrollHeight - innerHeight))})`; }, { passive: true });
+
+  route();
+  /* Gold 7 + embers. Pose per page via body[data-pose="x,y,scale,angle"] */
+  const ctx = cv.getContext('2d'); if (!ctx) return;
+  pose = pose || [.78,.5,1,.5];
+  const SHAPE = [[-.9, 1.5], [.9, 1.5], [.9, 1.2], [.05, -1.5], [-.45, -1.5], [.4, 1], [-.9, 1]];
+  let W, H, D, mx = 0, sx = 0, T = 0, last = performance.now();
+  const sv = { x: pose[0], y: pose[1], s: pose[2], a: pose[3] };
+  const em = Array.from({ length: reduce ? 0 : (innerWidth < 820 ? 24 : 55) }, () => ({ x: Math.random(), y: Math.random(), r: Math.random() * 1.8 + .4, v: Math.random() * .0004 + .00008, g: Math.random() > .5 }));
+  const size = () => { D = Math.min(devicePixelRatio || 1, innerWidth < 820 ? 1.5 : 2); W = innerWidth; H = innerHeight; cv.width = W * D; cv.height = H * D; };
+  size(); addEventListener('resize', size);
+  addEventListener('pointermove', e => { mx = e.clientX / W - .5; }, { passive: true });
+  function seven(cx, cy, u, a) {
+    const c = Math.cos(a), sn = Math.sin(a), N = 22, dep = u * .026;
+    const pt = (p, k) => [cx + p[0] * u * c - sn * k * dep * 1.4, cy - p[1] * u + k * dep * .35];
+    for (let k = N; k >= 0; k--) {
+      ctx.beginPath(); SHAPE.forEach((p, i) => { const q = pt(p, k); i ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1]); }); ctx.closePath();
+      if (k) { const t = k / N; ctx.fillStyle = `rgb(${Math.round(150 - 90 * t)},${Math.round(110 - 70 * t)},${Math.round(40 - 25 * t)})`; ctx.fill(); }
+      else {
+        const g = ctx.createLinearGradient(cx - u, cy - 1.5 * u, cx + u, cy + 1.5 * u);
+        g.addColorStop(0, '#fff1c0'); g.addColorStop(.35, '#d9b35a'); g.addColorStop(.7, '#b8892f'); g.addColorStop(1, '#6e4d14');
+        ctx.shadowColor = 'rgba(179,18,42,.55)'; ctx.shadowBlur = u * .5; ctx.fillStyle = g; ctx.fill(); ctx.shadowBlur = 0;
+        ctx.lineWidth = Math.max(1, u * .012); ctx.strokeStyle = 'rgba(255,240,200,.7)'; ctx.stroke();
+      }
+    }
+  }
+  function frame(now) {
+    const dt = Math.min(now - last, 50); last = now; T += dt / 1000; sx += (mx - sx) * .05;
+    ['x', 'y', 's', 'a'].forEach((k, i) => sv[k] += (pose[i] - sv[k]) * .07);
+    flip = flip > .01 ? flip * .955 : 0;
+    ctx.setTransform(D, 0, 0, D, 0, 0); ctx.clearRect(0, 0, W, H);
+    em.forEach(e => { e.y -= e.v * dt; if (e.y < -.02) { e.y = 1.02; e.x = Math.random(); }
+      ctx.globalAlpha = .35; ctx.fillStyle = e.g ? '#c9a24b' : '#b3122a'; ctx.beginPath(); ctx.arc(e.x * W, e.y * H, e.r, 0, 6.3); ctx.fill(); });
+    ctx.globalAlpha = 1;
+    const m = reduce ? 0 : 1, mob = innerWidth < 820;
+    const a = sv.a + m * (Math.sin(T * .7) * .55 + sx * .9) + flip;
+    const bob = m * Math.sin(T * 1.1) * .03, pulse = 1 + m * Math.sin(T * 1.6) * .035;
+    const par = m * -Math.min(scrollY, H * 2) * .12;
+    seven((mob ? .5 : sv.x) * W, (mob ? .3 : sv.y + bob) * H + par, Math.min(H * .7, 620) * sv.s * pulse * (mob ? .55 : 1) / 3, a);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+<script>
+/* Google AdSense: loaded only after consent, and only when a real publisher id and ad-unit ids are configured */
+(() => {
+  'use strict';
+  const $ = s => document.querySelector(s), C = window.CR7 || {}, A = C.ads || {};
+  const on = !!A.client && !/X{4}/.test(A.client) && /^ca-pub-\d{10,20}$/.test(A.client);
+  const bn = $('#cc'), secs = [...document.querySelectorAll('.adsec')];
+  if (C.contact) { const t = $('#contactTxt'); if (t) t.textContent = 'Contact: ' + C.contact; }
+  if (!on) { secs.forEach(e => e.remove()); bn.remove(); return; }
+  secs.forEach((sec, n) => { const slot = (A.slots || [])[n], ins = sec.querySelector('ins');
+    if (!slot) { sec.remove(); return; } ins.dataset.adClient = A.client; ins.dataset.adSlot = slot; });
+  let loaded = false;
+  const fill = () => { if (!loaded) return;
+    document.querySelectorAll('.page:not([hidden]) ins.adsbygoogle:not([data-done])').forEach(i => { i.dataset.done = '1'; try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {} }); };
+  function load(personal) {
+    if (loaded) return; loaded = true;
+    window.adsbygoogle = window.adsbygoogle || [];
+    if (!personal) window.adsbygoogle.requestNonPersonalizedAds = 1;
+    const s = document.createElement('script'); s.async = true; s.crossOrigin = 'anonymous';
+    s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + encodeURIComponent(A.client);
+    document.head.appendChild(s); fill();
+  }
+  addEventListener('cr7:route', () => setTimeout(fill, 50));
+  let ck = null; try { ck = localStorage.getItem('cc'); } catch (e) {}
+  const set = v => { try { localStorage.setItem('cc', v); } catch (e) {} bn.hidden = true; load(v === 'y'); };
+  $('#ccy').onclick = () => set('y'); $('#ccn').onclick = () => set('n');
+  $('#ccset').hidden = false; $('#ccset').onclick = () => { bn.hidden = false; };
+  if (ck) load(ck === 'y'); else bn.hidden = false;
+})();
+</script>
+<script>
+/* Countdown to a farewell match (if configured), otherwise time elapsed since the last match. */
+(() => {
+  'use strict';
+  const $ = s => document.getElementById(s);
+  const C = window.CR7 || {};
+  const fw = C.farewell || {}, lm = C.lastMatch || {};
+  const fwT = Date.parse(fw.date || ''), lmT = Date.parse(lm.date || '');
+  const pad = n => String(n).padStart(2, '0');
+  function put(ms) {
+    const t = Math.max(0, Math.floor(ms / 1000));
+    $('d').textContent = Math.floor(t / 86400); $('h').textContent = pad(Math.floor(t % 86400 / 3600));
+    $('m').textContent = pad(Math.floor(t % 3600 / 60)); $('s').textContent = pad(t % 60);
+  }
+  function tick() {
+    const now = Date.now();
+    if (fwT && fwT > now) {
+      $('title').textContent = 'Countdown to the farewell.';
+      $('pill').textContent = 'COUNTING DOWN';
+      $('lead').textContent = 'Time left until the final match in Portugal colours.';
+      $('match').textContent = fw.label || '';
+      $('why').textContent = '';
+      put(fwT - now);
+    } else if (lmT) {
+      $('title').textContent = 'Since the last match.';
+      $('pill').textContent = 'NO FAREWELL MATCH ANNOUNCED';
+      $('lead').textContent = 'Reports say Ronaldo’s Portugal career ended after the match below, and no farewell game has been scheduled. This counter shows the time that has passed since.';
+      $('match').textContent = 'Last match played: ' + (lm.label || '') + ' (' + new Date(lmT).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) + ').';
+      $('why').textContent = 'If a farewell match is officially announced, the site owner can add its date to js/config.js and this page will switch to a live countdown automatically.';
+      put(now - lmT);
+    }
+  }
+  tick(); setInterval(tick, 1000);
+})();
+
+(() => {
+  'use strict';
+  const Q = [
+    { q: 'Which team did Ronaldo face on his Portugal debut in 2003?', o: ['Kazakhstan', 'Greece', 'Spain', 'France'], a: 0 },
+    { q: 'Who beat Portugal in the Euro 2004 final?', o: ['France', 'Greece', 'Germany', 'Spain'], a: 1 },
+    { q: 'Portugal won their first major title at Euro 2016. Who did they beat in the final?', o: ['Wales', 'Germany', 'France', 'Poland'], a: 2 },
+    { q: 'He scored a hat-trick in a 3–3 draw with which team at the 2018 World Cup?', o: ['Spain', 'Morocco', 'Iran', 'Uruguay'], a: 0 },
+    { q: 'How many Nations League titles has Portugal won with Ronaldo?', o: ['One', 'Two', 'Three', 'None'], a: 1 },
+    { q: 'How many goals did he score for Portugal (men’s international record)?', o: ['120', '135', '146', '160'], a: 2 }
+  ];
+  const box = document.getElementById('quiz'); let i = 0, score = 0;
+  const el = (t, props, ...kids) => { const e = Object.assign(document.createElement(t), props); kids.forEach(k => e.append(k)); return e; };
+  function show() {
+    box.replaceChildren();
+    if (i >= Q.length) {
+      box.append(el('p', { className: 'big' }, score + ' / ' + Q.length),
+        el('p', { className: 'd', textContent: score >= 5 ? 'True fan. Forever Seven.' : score >= 3 ? 'Solid! A few more to learn.' : 'Time to explore the legacy pages.' }),
+        el('div', { className: 'row' }, el('button', { className: 'btn p', type: 'button', textContent: 'PLAY AGAIN', onclick: () => { i = 0; score = 0; show(); } }),
+          el('a', { className: 'btn', href: '#legacy', textContent: 'READ THE LEGACY' })));
+      return;
+    }
+    const q = Q[i], bar = el('div', { className: 'qbar' }, el('i')); bar.firstChild.style.width = (i / Q.length * 100) + '%';
+    const opts = el('div', { className: 'opts' }), msg = el('p', { className: 'note', role: 'status' });
+    q.o.forEach((t, k) => {
+      const b = el('button', { type: 'button', textContent: t });
+      b.onclick = () => {
+        [...opts.children].forEach((x, j) => { x.disabled = true; if (j === q.a) x.classList.add('ok'); });
+        if (k === q.a) score++; else b.classList.add('bad');
+        msg.textContent = k === q.a ? 'Correct!' : 'Not quite.';
+        opts.after(el('div', { className: 'row' }, el('button', { className: 'btn p', type: 'button', textContent: i + 1 === Q.length ? 'SEE RESULT' : 'NEXT', onclick: () => { i++; show(); } })));
+      };
+      opts.append(b);
+    });
+    box.append(bar, el('p', { className: 'note', textContent: 'Question ' + (i + 1) + ' of ' + Q.length }), el('p', { className: 'q', textContent: q.q }), opts, msg);
+  }
+  show();
+})();
+
+/* Messi vs Ronaldo poll. Each person (private id + name) has a saved vote; it can be changed on this device. */
+(() => {
+  'use strict';
+  const $ = s => document.querySelector(s), CFG = window.CR7 || {}, U = window.CR7user;
+  const btns = document.querySelectorAll('.side'), msg = $('#voteMsg'), S = CFG.supabase || {};
+  const live = /^https:\/\//.test(S.url || '') && !!S.key, fmt = n => (+n || 0).toLocaleString('en-US');
+  const NAMES = { messi: 'Messi', ronaldo: 'Ronaldo' };
+  let rec = null, tally = { messi: 0, ronaldo: 0 };
+  try { rec = JSON.parse(localStorage.getItem('voteRec') || 'null'); const old = localStorage.getItem('vote'); if (!rec && old) rec = { c: old, t: Date.now() };
+        const t = JSON.parse(localStorage.getItem('tally') || 'null'); if (t) tally = { messi: +t.messi || 0, ronaldo: +t.ronaldo || 0 }; } catch (e) {}
+  const save = () => { try { rec ? localStorage.setItem('voteRec', JSON.stringify(rec)) : localStorage.removeItem('voteRec'); localStorage.setItem('tally', JSON.stringify(tally)); } catch (e) {} };
+  const rpc = (fn, body) => fetch(S.url.replace(/\/$/, '') + '/rest/v1/rpc/' + fn, { method: 'POST',
+    headers: Object.assign({ apikey: S.key, 'Content-Type': 'application/json' }, /^eyJ/.test(S.key) ? { Authorization: 'Bearer ' + S.key } : {}), body: JSON.stringify(body || {}) })
+    .then(r => { if (!r.ok) throw 0; return r.text(); }).then(t => t ? JSON.parse(t) : null);
+  const show = r => { const m = +r.messi || 0, c = +r.ronaldo || 0, t = m + c;
+    btns.forEach(b => { const v = b.dataset.c === 'messi' ? m : c, p = t ? Math.round(v / t * 100) : 0;
+      b.querySelector('.n').textContent = fmt(v); b.dataset.pct = t ? p + '%' : ''; b.querySelector('i').style.width = p + '%'; });
+    $('#vt').textContent = fmt(t); $('#vl').textContent = live ? 'votes worldwide' : 'votes on this device'; };
+  const mark = () => btns.forEach(b => b.classList.toggle('mine', !!rec && b.dataset.c === rec.c));
+  function profile() {
+    const u = U.get(), box = $('#mineTxt');
+    box.textContent = (u.name ? u.name : 'Anonymous fan') + ' · ' + (rec ? 'voted ' + NAMES[rec.c] + ' on ' + new Date(rec.t).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) + '. Saved.' : 'no vote yet.');
+    $('#wn').value = u.name;
+  }
+  mark(); profile(); if (live) rpc('poll_results').then(show).catch(() => show(tally)); else show(tally);
+  $('#who').addEventListener('submit', e => { e.preventDefault(); U.setName($('#wn').value); profile(); msg.textContent = 'Name saved.'; dispatchEvent(new Event('cr7:user')); });
+  btns.forEach(b => b.addEventListener('click', () => {
+    const c = b.dataset.c;
+    if (rec && rec.c === c) { msg.textContent = 'Your vote for ' + NAMES[c] + ' is already saved. Thank you!'; return; }
+    const prev = rec && rec.c, prevRec = rec; rec = { c, t: Date.now() }; save(); mark(); profile();
+    if (!live) { if (prev) tally[prev] = Math.max(0, tally[prev] - 1); tally[c]++; save(); show(tally);
+      msg.textContent = (prev ? 'Vote changed to ' : 'Vote saved for ') + NAMES[c] + '. Counted on this device; worldwide totals appear once the live poll is connected.'; return; }
+    msg.textContent = 'Sending your vote…';
+    rpc('cast_vote', { c, v: U.get().id }).then(() => rpc('poll_results')).then(r => { show(r); msg.textContent = (prev ? 'Vote changed to ' : 'Vote saved for ') + NAMES[c] + '. Thank you!'; })
+      .catch(() => { msg.textContent = 'Could not reach the poll. Please try again later.'; rec = prevRec; save(); mark(); profile(); });
+  }));
+})();
+
+/* Fan wall: messages are saved per person (private id + name) in this browser; you can delete your own */
+(() => {
+  'use strict';
+  const U = window.CR7user, wall = document.getElementById('wall'), f = document.getElementById('f');
+  let list = []; try { list = JSON.parse(localStorage.getItem('msgs') || '[]'); if (!Array.isArray(list)) list = []; } catch (e) {}
+  const persist = () => { try { localStorage.setItem('msgs', JSON.stringify(list)); } catch (x) {} };
+  const prefill = () => { if (!f.nm.value) f.nm.value = U.get().name; };
+  const draw = () => {
+    wall.replaceChildren();
+    if (!list.length) { const p = document.createElement('p'); p.className = 'empty'; p.textContent = 'No messages yet. Be the first!'; wall.append(p); return; }
+    list.slice().reverse().forEach(m => {
+      const c = document.createElement('div'); c.className = 'card';
+      const p = document.createElement('p'); p.textContent = String(m.t).slice(0, 140);
+      const h = document.createElement('h3'); h.textContent = '— ' + String(m.n).slice(0, 30);
+      c.append(p, h);
+      if (m.id && m.id === U.get().id) {
+        const d = document.createElement('button'); d.type = 'button'; d.className = 'btn'; d.style.cssText = 'margin-top:1rem;padding:.6rem 1rem'; d.textContent = 'DELETE MINE';
+        d.onclick = () => { list = list.filter(x => x !== m); persist(); draw(); };
+        c.append(d);
+      }
+      wall.append(c);
+    });
+  };
+  f.addEventListener('submit', e => {
+    e.preventDefault();
+    const n = f.nm.value.trim(), t = f.tx.value.trim(); if (!n || !t) return;
+    U.setName(n); list.push({ n, t, id: U.get().id, at: Date.now() }); list = list.slice(-30); persist();
+    f.tx.value = ''; draw(); dispatchEvent(new Event('cr7:user'));
+  });
+  addEventListener('cr7:user', prefill);
+  prefill(); draw();
+})();
+
+/* Donations: only https links from config, built with safe DOM APIs */
+(() => {
+  'use strict';
+  const box = document.getElementById('donate'), d = (window.CR7 || {}).donate || {};
+  const labels = { kofi: 'SUPPORT ON KO-FI', buymeacoffee: 'BUY ME A COFFEE', paypal: 'DONATE VIA PAYPAL', stripe: 'DONATE BY CARD' };
+  let count = 0;
+  Object.keys(labels).forEach(k => {
+    let u; try { u = new URL(d[k]); } catch (e) { return; }
+    if (u.protocol !== 'https:') return;
+    const a = document.createElement('a');
+    a.className = 'btn' + (count ? '' : ' p'); a.href = u.href; a.textContent = labels[k];
+    a.target = '_blank'; a.rel = 'noopener noreferrer'; box.appendChild(a); count++;
+  });
+  if (!count) { const p = document.createElement('p'); p.className = 'empty'; p.textContent = 'Donations will open soon.'; box.appendChild(p); }
+})();
+
+</script>
+<script>
+
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return; io.unobserve(e.target);
+    const el = e.target.querySelector('[data-n]'), end = +el.dataset.n; let t0;
+    if (reduce) { el.textContent = end; return; }
+    const step = t => { t0 = t0 || t; const p = Math.min((t - t0) / 1800, 1); el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  }), { threshold: .4 });
+  document.querySelectorAll('.grid4 .card').forEach(c => io.observe(c));
+})();
+
+</script>
+</body>
+</html>
